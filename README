@@ -1,0 +1,47 @@
+Requirements
+============
+
+* MIT Kerberos 1.9+ with pwqual plugin interface
+
+* cracklib; (optionally) version 2.9+ which provides FascistCheckUser()
+
+
+Installation
+============
+
+1. compile & test
+
+  make clean && make && ./pwqual-cracklib
+  mkdir -p /usr/lib/krb5/plugins/pwqual/
+  cp cracklib.so /usr/lib/krb5/plugins/pwqual/
+
+2. modify /etc/krb5.conf, add
+
+   ```
+   [plugins]
+           pwqual = {
+                  module = cracklib:pwqual/cracklib.so
+           }
+   ```
+
+   and restart the server.
+
+3. test
+
+   # kadmin.local -q 'cpw -pw test123 liuzx'
+   Authenticating as principal root/admin@EXAMPLE.COM with password.
+   change_password: Password is too short while changing password for "liuzx@EXAMPLE.COM".
+
+   Remote clients ('kpasswd', 'kadmin') will see only a generic error message.
+
+   # kpasswd liuzx
+   Password for liuzx@EXAMPLE.COM:
+   Enter new password:
+   Enter it again:
+   Password change rejected: Password not changed.
+   Unspecified password quality failure while trying to change password.
+
+   For exact reason, please check the logfile.
+
+   2016-06-20T17:50:02.638866+08:00 scms(127.0.0.1) auth.err kadmind[14783]:  password quality module cracklib rejected password for liuzx@EXAMPLE.COM: it is too simplistic/systematic
+
