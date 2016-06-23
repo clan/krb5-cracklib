@@ -1,4 +1,6 @@
 /**
+ * @see http://web.mit.edu/Kerberos/krb5-latest/doc/plugindev/pwqual.html
+ *
  * @todo add more check, see `man pam_cracklib`
  */
 #include <ctype.h>
