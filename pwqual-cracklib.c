@@ -79,12 +79,12 @@ pwqual_check(const char *username, const char *password)
     } while(0);
 
     if (newmono) {
-        free(newmono);
         memset(newmono, 0, strlen(newmono));
+        free(newmono);
     }
     if (usermono) {
-        free(usermono);
         memset(usermono, 0, strlen(usermono));
+        free(usermono);
     }
 
     return res;
