@@ -98,6 +98,7 @@ int main(void)
     const char *res = NULL, *user, *pass;
 
     const char *users[][2] = {
+        {"liuzx", "liuzx123"},
         {"liuzx", "123456"},
         {"liuzx", "aMirAlbblAriMa"}
     };
